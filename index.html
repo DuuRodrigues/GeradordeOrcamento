@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Orçamento</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Gerador de Orçamento</h1>
+
+    <form id="orcamentoForm">
+        <img src="/imagens/logomarca.jpg" id='logomarca' alt="logo" width="140" height="150">
+
+        <label for="dataValidade">Data de Validade / Serviço Realizado</label>
+        <input type="date" id="dataValidade" required>
+
+        <label for="clienteNome">Nome do Cliente:</label>
+        <input type="text" id="clienteNome" required>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" required>
+
+        <label for="descricaoServico">Serviço Solicitado / Realizado</label>
+        <textarea id="descricaoServico" required></textarea>
+
+        <label for="precoServico">Preço do Serviço:</label>
+        <input type="number" id="precoServico" required>
+
+        <button type="button" id="gerarOrcamento" onclick="Orcamento ()">Gerar Orçamento</button>
+        <button type="button" id="gerarRecibo" onclick="Recibo ()">Gerar Recibo</button>
+    </form>
+
+    <div id="orcamentoResult" style="display:none;">
+        <pre id="orcamentoTexto"></pre>
+        <button id="baixarPdf">Baixar em PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
