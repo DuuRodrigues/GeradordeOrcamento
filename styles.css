@@ -1,15 +1,24 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
+    background-color: rgb(201, 230, 220);
 }
 
 form {
     margin-bottom: 20px;
+    border: 1px solid;
+    border-top-left-radius: 20px;
 }
 
-label {
+form input, form textarea {
+    margin: 5px;
+    width: 600px;
+}
+
+label{
     display: block;
-    margin-top: 10px;
+    margin-left: 20px;
+    align-items:center
 }
 
 input, textarea {
@@ -19,7 +28,8 @@ input, textarea {
 }
 
 button {
-    margin-top: 10px;
+    align-items:center;
+    margin-top: 5px;
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -30,3 +40,4 @@ button {
 button:hover {
     background-color: #45a049;
 }
+

@@ -8,75 +8,83 @@ const dataAtual = new Date();
 const opcoesFormatacao = { day: "numeric", month: "2-digit", year: "numeric" };
 const dataFormatada = dataAtual.toLocaleDateString("pt-BR", opcoesFormatacao);
 
-const imageURL = 'https://drive.google.com/file/d/17q0mHQAZuItv9N8fJi5dfWB_913jNFS6/view?usp=sharing'
-
 
 function Orcamento() {
-  const clienteNome = "Marcelinho Mamute Mamador"; //document.getElementById("clienteNome").value;
-  const descricaoServico = "Mamador de piroca Profissional"; //document.getElementById("descricaoServico").value;
-  const precoServico = "2,50"; //document.getElementById("precoServico").value;
-  const dataValidade = "10/10/1010"; //document.getElementById("dataValidade").value;
-  const endereco = "Rua Dos Vagabundos"; //document.getElementById("endereco")
+  const clienteNome = document.getElementById("clienteNome").value;
+  const descricaoServico = document.getElementById("descricaoServico").value
+  const precoServico = document.getElementById("precoServico").value;
+  const dataValidade = document.getElementById("dataValidade").value;
+  const endereco = document.getElementById("endereco").value
+  const obsPrestador = document.getElementById("obsPrestador").value
 
+  const showImg = document.getElementById('showImg')
   document.getElementById("orcamentoResult").style.display = "block";
   document.getElementById("baixarPdf").addEventListener("click", function () {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-    const img = new Image()
-    img.src = imageURL
-    img.onload = function () { 
-      const imgWidth = pdf.internal.pageSize.getWidth();
-      const imgHeight = (img.height * imgWidth) / img.width;
-      pdf.addImage(imageDataURL, 'JPEG', 10, 10, imgWidth - 20, imgHeight);
-
-      doc.text(tipo, 140, 20);
-      doc.text(razaosicial, 140, 27);
-      doc.text(cnpj, 140, 35);
-      doc.text(separador, 0, 50);
-      doc.text(`Orçamento Gerado em: ${dataFormatada}. Valido ate: ${dataValidade}`, 60, 55);
-      doc.text(separador, 0, 60);
-
+  doc.addImage(showImg, 0, 0, 210, 50)
+  doc.text(separador, 0, 52);
+  doc.text(`Orçamento Gerado em: ${dataFormatada}. Valido ate: ${dataValidade}`, 60, 56);
+  
       // DADOS CLIENTE
-      doc.text(`Cliente: ${clienteNome}`, 5, 90);
-      doc.text(`Endereço: ${endereco}`, 5, 97);
+  doc.text(`Dados Cliente`, 5, 70)
+            doc.text(separador, 43, 70);
+      doc.text(`${clienteNome}`, 10, 77);
+      doc.text(`Endereço: ${endereco}`, 10, 85);
 
-      doc.text(`Serviço Solicitado: ${descricaoServico}`, 5, 120);
-      doc.text(`Preço do Serviço: R$ ${precoServico}`, 5, 127);
+      // DADOS SERVIÇO
+  doc.text(`Serviço Solicitado`, 5, 105)
+            doc.text(separador, 52, 105);
+      doc.text(`${descricaoServico}`, 10, 112);
+      doc.text(`Preço do Serviço ---------------------------------------------------------------`, 5, 150)
+      doc.text(` R$ ${precoServico}`, 170, 150);
 
-      doc.save("orcamento.pdf");
-    }
-  });
+      doc.text(`Observações do Prestado`, 5, 165)
+            doc.text(separador, 73, 165);
+      doc.text(`${obsPrestador}`, 10, 182)
+
+  doc.save(`Orçamento_${clienteNome}.pdf`);
+  });  
 }
 
 
 function Recibo() {
-  const clienteNome = "Marcelinho Mamute Mamador"; //document.getElementById("clienteNome").value;
-  const descricaoServico = "Mamador de piroca Profissional"; //document.getElementById("descricaoServico").value;
-  const precoServico = "2,50"; //document.getElementById("precoServico").value;
-  const dataValidade = "10/10/1010"; //document.getElementById("dataValidade").value;
-  const endereco = "Rua Dos Vagabundos"; //document.getElementById("endereco")
+  const clienteNome = document.getElementById("clienteNome").value;
+  const descricaoServico = document.getElementById("descricaoServico").value
+  const precoServico = document.getElementById("precoServico").value;
+  const dataValidade = document.getElementById("dataValidade").value;
+  const endereco = document.getElementById("endereco")
+  const obsPrestador = document.getElementById("obsPrestador")
 
+  const showImg = document.getElementById('showImg')
+  document.getElementById("orcamentoResult").style.display = "block";
+  document.getElementById("baixarPdf").addEventListener("click", function () {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-    document.getElementById("orcamentoResult").style.display = "block";
+  doc.addImage(showImg, 0, 0, 210, 50)
+  doc.text(separador, 0, 52);
+  doc.text(`Recibo Gerado em: ${dataFormatada}. Valido ate: ${dataValidade}`, 60, 56);
+  //doc.text(separador, 0, 60);
 
-    document.getElementById("baixarPdf").addEventListener("click", function () {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-      doc.text(tipo2, 140, 20);
-    doc.text(razaosicial, 140, 27);
-    doc.text(cnpj, 140, 35);
-    doc.text(separador, 0, 50);
-    doc.text(`Orçamento Gerado em: ${dataFormatada}. Valido ate: ${dataValidade}`, 60, 55);
-    doc.text(separador, 0, 60);
+      // DADOS CLIENTE
+  doc.text(`Dados Cliente`, 5, 70)
+            doc.text(separador, 43, 70);
+      doc.text(`${clienteNome}`, 10, 77);
+      doc.text(`Endereço: ${endereco}`, 10, 85);
 
-    // DADOS CLIENTE
-    doc.text(`Cliente: ${clienteNome}`, 5, 90);
-    doc.text(`Endereço: ${endereco}`, 5, 97);
-      
-    doc.text(`Serviço Solicitado: ${descricaoServico}`, 5, 120);
-    doc.text(`Preço do Serviço: R$ ${precoServico}`, 5, 127);
-      doc.save(`Recibo.pdf`);
-    });
-  }
+      // DADOS SERVIÇO
+  doc.text(`Serviço Solicitado`, 5, 105)
+            doc.text(separador, 52, 105);
+      doc.text(`${descricaoServico}`, 10, 112);
+      doc.text(`Preço do Serviço ---------------------------------------------------------------`, 5, 150)
+      doc.text(` R$ ${precoServico}`, 170, 150);
 
+      doc.text(`Observações do Prestado`, 5, 165)
+            doc.text(separador, 73, 165);
+      doc.text(`${obsPrestador}`, 10, 182)
+
+  doc.save(`Recibo_${clienteNome}.pdf`);
+  });  
+}
